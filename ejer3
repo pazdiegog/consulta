@@ -1,0 +1,190 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <array>
+
+
+using namespace std;
+
+ifstream in;
+
+typedef struct  {
+	string agrupacion;
+	string candidato;
+	int lista;
+	int votos;
+}Listado;
+const unsigned int MAX = 10 * 3;
+array<Listado , 30> senadores, diputados;
+Listado r;
+string GetNombreDeArchivoDeMesa(string UnaMesa)
+{
+	return "Mesa" + UnaMesa + ".txt";
+}
+
+string UnaMesa;
+
+int main()
+{
+	cout << "Seleccione el numero de mesa: ";
+	cin >> UnaMesa;
+	void SumarLosVotos();
+	void MostrarListados();
+	//void CalcularEInformarLasEstadisticas();
+	SumarLosVotos();
+	MostrarListados();
+	cin >> UnaMesa; //congelar la pantalla y evitar que termine
+}
+////////////////////////////////////////////////////////////////////////////////////////////////
+void PonerEnCeroLosVotos(array<Listado,MAX> a)
+{
+	for (int i = 0; i<MAX; ++i)
+		a.at(i).votos = 0;
+}
+
+void PonerEnCeroLosVotosDeSenadoresYDiputados()
+{
+	PonerEnCeroLosVotos(senadores);
+	PonerEnCeroLosVotos(diputados);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////
+void SumarLosVotosDeUnArchivo(string nombreDeArchivo)
+{
+	in.open(GetNombreDeArchivoDeMesa(UnaMesa));
+	void AvanzarHastaSenadores();
+	void SumarVotosDeSenadores();
+	void AvanzarHastaDiputados();
+	void SumarVotosDeDiputados();
+	AvanzarHastaSenadores();
+	SumarVotosDeSenadores();
+	AvanzarHastaDiputados();
+	SumarVotosDeDiputados();
+	in.close();
+}
+
+void SaltearLineas(ifstream& in)
+{ 
+	string line;
+	getline(in,line);
+	cout << line << "\n\n";
+}
+
+void SaltearVotosEnBlancoEImpugnados(ifstream& in)
+{	
+		SaltearLineas(in);
+		SaltearLineas(in);
+}
+Listado LeerRegistro(ifstream& in)
+{
+	in
+		>> r.agrupacion
+		>> r.lista
+		>> r.candidato
+		>> r.votos;
+	return r;
+}
+
+void SumarVotosDeUnCargo(array <Listado, MAX> a,ifstream& in)
+{
+	for (unsigned i = 0; i < MAX; ++i)
+	{
+		r = LeerRegistro(in);
+		a.at(i).agrupacion = r.agrupacion;
+		a.at(i).lista = r.lista;
+		a.at(i).candidato = r.candidato;
+		a.at(i).votos += r.votos;
+	}
+}
+
+void SumarVotosDeSenadores()
+{
+	SumarVotosDeUnCargo(senadores,in);
+}
+void SumarVotosDeDiputados()
+{
+	SumarVotosDeUnCargo(diputados,in);
+}
+
+void AvanzarHastaSenadores()
+{
+	SaltearLineas(in); //TODO: Qué se leyo?
+	SaltearLineas(in);
+	SaltearLineas(in);
+}
+
+void AvanzarHastaDiputados()
+{
+	SaltearLineas(in);
+	SaltearLineas(in);
+	SaltearLineas(in);
+}
+
+void SumarLosVotosDeLosArchivos()
+{
+	string UnaMesa="4568"; // TODO:cinco veces por cada archivo
+	SumarLosVotosDeUnArchivo(UnaMesa);
+}
+
+void SumarLosVotos()
+{
+	PonerEnCeroLosVotosDeSenadoresYDiputados();
+	SumarLosVotosDeLosArchivos();
+}
+
+void ImprimirArreglo(array<Listado, MAX> a)
+{
+	for (unsigned i = 0; i < MAX; ++i)
+		cout << a[i].agrupacion<<"\t"
+		<< a[i].lista<<"\t"
+		<< a[i].candidato<<"\t"
+		<< a[i].votos<<"\t\n";
+}
+
+void MostrarListado1() 
+{
+	//OrdenarPorVoto();
+	cout<< "Senadores"<<endl;
+	ImprimirArreglo(senadores);
+	cout<< "Diputados"<<endl;
+	ImprimirArreglo(diputados);
+}
+
+void MostrarListados() 
+{
+	MostrarListado1();
+}
+
+void OrdenarPorVoto()
+{
+
+}
+
+
+void OrdenarPorAgrupacion()
+{
+
+}
+
+
+void OrdenarPorLista()
+{
+
+}
+
+
+void OrdenarPorCandidato()
+{
+
+}
+
+
+void OrdenarPorAgrupacionYVotos()
+{
+
+}
+
+
+void OrdenarPorCandidatosYVotos()
+{
+
+}
