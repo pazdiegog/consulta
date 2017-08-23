@@ -6,6 +6,12 @@
 
 using namespace std;
 //funcion que intercambia
+
+void print(int *array, int tope)
+	{
+		for (int i=0; i<tope ; i++)
+			cout<<i<<":"<<array[i]<<endl;
+	}
 int trade(int *array, int start, int end)
 	{
 		int left;
@@ -14,38 +20,45 @@ int trade(int *array, int start, int end)
 		int temp;
 
 	pivot = array[end];
-	right = end;
+	right = end-1;
 	left = start;
 	
 	//mientras no se cruzen los indices
 		while (left < right)
-		{	if ((array[right] < pivot) && (array[left] > pivot))
-			{
-				temp= array[left];
-				array[left]=array[right];
-				array[right]=temp;
-			}
-			if (array[right] > pivot )
+		{	while (array[right]>pivot)
 				right--;
-			if ((array[left] < pivot))
+			while (array[left]<=pivot)
 				left++;
+		
+		if (left < right) //para no intercambiar con los indices cruzados.
+			{
+			temp=array[left];
+			array[left]=array[right];
+			array[right]=temp;
+			}
 		}
-	//intercambio pivot al lugar que corresponde
-	temp = array[left];
-	array[left] = array[end];
-	array[end] = temp;
-	return left;
+		//cuando se cruzan los indices intercambios el pivot con el slot de los indices cruzados.
+		temp= array[right];
+		array[right]=array[end];
+		array[end]=temp;
+		
+		//retorno la posicion del pivot
+		return right;
+
 	}
 //funcion recursiva
 void quicksort (int *array, int left, int right)
 {
 	int pivot;
-	
+	int tope = 13;
 	if (left < right)//0 < 10
 	{
 		pivot = trade(array, left, right);
 
 		quicksort(array, left, pivot-1); //sublista izquierda
+		cout << "pivot: " << pivot <<"\n";
+		cout << "sublista izquierda\n";
+		print (array, tope);
 		quicksort(array, pivot+1, right); //sublista derecha
 	}
 
@@ -65,22 +78,25 @@ void quicksort (int *array, int left, int right)
 
 
 int main ()
-{	int const tope = 10;
+{	int const tope = 13;
 	int array[tope];
-	array [0]= 9;
-	array [1]= 4;
-	array [2]= 3;
-	array [3]= 1;
-	array [4]= 6;
-	array [5]= 7;
-	array [6]= 2;
-	array [7]= 5;
-	array [8]= 8;
-	array [9]= 0;
-	
-	for (int i=0; i < tope ; i++)
-		cout<<i<<":"<<array[i]<<endl;
+	array [0]= 8;
+	array [1]= 1;
+	array [2]= 5;
+	array [3]= 14;
+	array [4]= 4;
+	array [5]= 15;
+	array [6]= 12;
+	array [7]= 6;
+	array [8]= 2;
+	array [9]= 11;
+	array [10]=10;
+	array [11]=7;
+	array [12]=9;
+void print(int *array, int tope);
+
+	print (array, tope);
 	quicksort (array, 0, tope - 1);
-	for (int i=0; i < tope ; i++)
-		cout<<i<<":"<<array[i]<<endl;	
+	cout<< "\nOrdenado:\n";
+	print (array, tope);	
 }
