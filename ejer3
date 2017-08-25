@@ -15,7 +15,7 @@ typedef struct  {
 	int votos;
 }Listado;
 const unsigned int MAX = 10 * 3;
-array<Listado , 30> senadores, diputados;
+array<Listado , MAX> senadores, diputados;
 Listado r;
 string GetNombreDeArchivoDeMesa(string UnaMesa)
 {
@@ -29,14 +29,15 @@ int main()
 	cout << "Seleccione el numero de mesa: ";
 	cin >> UnaMesa;
 	void SumarLosVotos();
-	void MostrarListados();
+	void MostrarListados(array <Listado, MAX> &a);
 	//void CalcularEInformarLasEstadisticas();
 	SumarLosVotos();
-	MostrarListados();
+	MostrarListados(senadores);
 	cin >> UnaMesa; //congelar la pantalla y evitar que termine
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
-void PonerEnCeroLosVotos(array<Listado,MAX> a)
+/*
+*/void PonerEnCeroLosVotos(array<Listado,MAX> &a)
 {
 	for (int i = 0; i<MAX; ++i)
 		a.at(i).votos = 0;
@@ -48,6 +49,19 @@ void PonerEnCeroLosVotosDeSenadoresYDiputados()
 	PonerEnCeroLosVotos(diputados);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
+void SaltearLineas(ifstream& in)
+{ 
+	string line;
+	getline(in,line);
+	cout << line << "\n";
+}
+void SaltearVotosEnBlancoEImpugnados(ifstream& in)
+{	
+		SaltearLineas(in);
+		SaltearLineas(in);
+		SaltearLineas(in);
+}
+
 void SumarLosVotosDeUnArchivo(string nombreDeArchivo)
 {
 	in.open(GetNombreDeArchivoDeMesa(UnaMesa));
@@ -57,23 +71,14 @@ void SumarLosVotosDeUnArchivo(string nombreDeArchivo)
 	void SumarVotosDeDiputados();
 	AvanzarHastaSenadores();
 	SumarVotosDeSenadores();
-	AvanzarHastaDiputados();
-	SumarVotosDeDiputados();
+	SaltearVotosEnBlancoEImpugnados(in);
+//	AvanzarHastaDiputados();
+//	SumarVotosDeDiputados();
 	in.close();
 }
 
-void SaltearLineas(ifstream& in)
-{ 
-	string line;
-	getline(in,line);
-	cout << line << "\n\n";
-}
 
-void SaltearVotosEnBlancoEImpugnados(ifstream& in)
-{	
-		SaltearLineas(in);
-		SaltearLineas(in);
-}
+
 Listado LeerRegistro(ifstream& in)
 {
 	in
@@ -84,41 +89,33 @@ Listado LeerRegistro(ifstream& in)
 	return r;
 }
 
-void SumarVotosDeUnCargo(array <Listado, MAX> a,ifstream& in)
-{
-	for (unsigned i = 0; i < MAX; ++i)
-	{
-		r = LeerRegistro(in);
-		a.at(i).agrupacion = r.agrupacion;
-		a.at(i).lista = r.lista;
-		a.at(i).candidato = r.candidato;
-		a.at(i).votos += r.votos;
-	}
-}
+void SumarVotosDeUnCargo(array <Listado, MAX>& a,ifstream& in);
 
 void SumarVotosDeSenadores()
 {
 	SumarVotosDeUnCargo(senadores,in);
+	
 }
+/*
 void SumarVotosDeDiputados()
 {
 	SumarVotosDeUnCargo(diputados,in);
 }
-
+*/
 void AvanzarHastaSenadores()
 {
 	SaltearLineas(in); //TODO: Qué se leyo?
 	SaltearLineas(in);
 	SaltearLineas(in);
 }
-
+/*
 void AvanzarHastaDiputados()
 {
 	SaltearLineas(in);
 	SaltearLineas(in);
 	SaltearLineas(in);
 }
-
+*/
 void SumarLosVotosDeLosArchivos()
 {
 	string UnaMesa="4568"; // TODO:cinco veces por cada archivo
@@ -131,7 +128,21 @@ void SumarLosVotos()
 	SumarLosVotosDeLosArchivos();
 }
 
-void ImprimirArreglo(array<Listado, MAX> a)
+void SumarVotosDeUnCargo(array <Listado, MAX> &a,ifstream& in)
+{
+	for (unsigned i = 0; i < MAX; ++i)
+	{
+		r = LeerRegistro(in);
+		SaltearLineas(in);
+		a.at(i).agrupacion = r.agrupacion;
+		a.at(i).lista = r.lista;
+		a.at(i).candidato = r.candidato;
+		a.at(i).votos += r.votos;
+	}
+
+}
+
+void ImprimirArreglo(const array<Listado, MAX> &a)
 {
 	for (unsigned i = 0; i < MAX; ++i)
 		cout << a[i].agrupacion<<"\t"
@@ -139,45 +150,93 @@ void ImprimirArreglo(array<Listado, MAX> a)
 		<< a[i].candidato<<"\t"
 		<< a[i].votos<<"\t\n";
 }
-
-void MostrarListado1() 
+/*
+void OrdenarPorVoto (array <Listado, MAX> &a) //burbuja
 {
-	//OrdenarPorVoto();
-	cout<< "Senadores"<<endl;
-	ImprimirArreglo(senadores);
-	cout<< "Diputados"<<endl;
-	ImprimirArreglo(diputados);
-}
-
-void MostrarListados() 
-{
-	MostrarListado1();
-}
-
-void OrdenarPorVoto()
-{
+for (int i=0; i<MAX-1; i++)
+	for (int j=0; j<MAX-1; j++)
+		if (a[j].votos > a[j+1].votos)
+		{
+			Listado aux;
+			aux=a[j];
+			a[j]=a[j+1];
+			a[j+1]=aux;
+		}
 
 }
-
-
-void OrdenarPorAgrupacion()
+*/
+void OrdenarPorAgrupacion (array <Listado, MAX> &a) //burbuja
 {
+for (int i=0; i<MAX-1; i++)
+	for (int j=0; j<MAX-1; j++)
+		if (a[j].agrupacion > a [j+1].agrupacion)
+		{
+			Listado aux;
+			aux=a[j];
+			a[j]=a[j+1];
+			a[j+1]=aux;
+		}
 
+}
+void OrdenarPorCandidato (array <Listado, MAX> &a) //insercion
+{
+	int j;
+	string temp;
+	for (int i=0; i<MAX; i++)
+	{	
+		temp= a[i].candidato;
+		j= i-1;
+		while ((j>=0) && (a[j].candidato> temp))
+		{
+			a[j+1]=a[j];
+			j--;
+		}
+		a[j+1].candidato = temp;
+	}
+
+}
+void MostrarListado1(array <Listado, MAX> &a) 
+{
+	OrdenarPorAgrupacion(a);
+	cout << "Senadores ordenados por agrupacion: \n";
+	ImprimirArreglo(a);
+	
+	cout << "\nSenadores ordenados por candidato: \n";
+	OrdenarPorCandidato(a);
+	ImprimirArreglo(a);
+//	ImprimirArreglo(diputados);
+}
+
+void MostrarListados(array <Listado, MAX> &a) 
+{
+	MostrarListado1 (a);
 }
 
 
-void OrdenarPorLista()
-{
+/*
 
+void OrdenarPorLista (array <Listado, MAX> &a) //shell
+{
+	for (int i=MAX/2; i !=0; i/=2)
+		for (int j=1; j!=0;)
+		{
+			j=0;
+			for (int k=i; k<MAX;k++)
+				if (a[k-i].lista>a[k].lista)
+				{
+					Listado temp=a[k];
+					a[k]=a[k-i];
+					a[k-i]=temp;
+					j++;
+				}
+		}
+	ImprimirArreglo (a);
 }
 
-
-void OrdenarPorCandidato()
-{
-
-}
+*/
 
 
+/*
 void OrdenarPorAgrupacionYVotos()
 {
 
@@ -187,4 +246,4 @@ void OrdenarPorAgrupacionYVotos()
 void OrdenarPorCandidatosYVotos()
 {
 
-}
+}*/
