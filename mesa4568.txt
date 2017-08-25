@@ -1,0 +1,71 @@
+Acta de la Mesa 4568.txt 
+Senadores 
+Agrupacion politica		Numero de lista		Nombre del candidato		Cantidad de votos 
+CAM					1 	 	 	JORGE			2 
+CAM					1 	 	 	JUAN			2 
+CAM					1 	 	 	PEDRO			3 
+UCR					1 	 	 	GABRIEL			5 
+UCR					1 	 	 	JUAN			4 
+UCR					1 	 	 	PEDRO			5 
+FRENTE					1 	 	 	ROBERTO			6 
+FRENTE					1 	 	 	JOSE			5 
+FRENTE					1 	 	 	ULISES			6 
+COMPRO					1 	 	 	CHICHO			3 
+COMPRO					1 	 	 	MARIO			3 
+COMPRO					1 	 	 	LUIS			6 
+LIBRES					1	 	 	TITO			6 
+LIBRES					1 	 	 	EZE			4 
+LIBRES					1 	 	 	JUAN			4 
+VICTO					1 	 	 	NESTOR			1 
+VICTO					1 	 	 	CRISTi			1 
+VICTO					1 	 	 	HERNAN			10 
+TUVIEJA					1 	 	 	FRANCO			5 
+TUVIEJA					1 	 	 	NICO			5 
+TUVIEJA					1 	 	 	MAURO			4 
+PRO					1 	 	 	HECTOR			1 
+PRO					1 	 	 	MARIA			1 
+PRO					1 	 	 	JUANA			7 
+FREPASO					1 	 	 	MARIA			1 
+FREPASO					1 	 	 	MARINA			5 
+FREPASO					1 	 	 	JUANA			5 
+PI					1 	 	 	ARIEL			1 
+PI					1 	 	 	GONZALO			1 
+PI					1 	 	 	LUIS			1 
+Votos en Blanco: 2
+Votos en impugnados: 3
+******************************************************************************************
+Diputados 
+Agrupación politica             Número de lista         Nombre del candidato    Cantidad de votos 
+PJ 	 	 		1 	 	 	JUA 	 	 	1 
+PJ 	 	 		1 	 	 	ROBERTO 	 	4 
+PJ 	 	 		1 	 	 	LUIS 	 	 	1 
+CAMBIEMOS			1 	 	 	MAURICIO 	 	3 
+CAMBIEMOS			1 	 	 	EUGENIA 	 	6 
+CAMBIEMOS			1 	 	 	JUANA 	 	 	1 
+ARI 	 	 		1 	 	 	LIDIA 	 	 	4 
+ARI 	 	 		1 	 	 	MAURO 	 	 	2 
+ARI 	 	 		1 	 	 	FRANCO 	 	 	5 
+PDC 	 	 		1 	 	 	HECTOR 	 	 	1 
+PDC 	 	 		1 	 	 	JOSE 	 	 	5 
+PDC 	 	 		1 	 	 	MARINA 	 	 	6 
+FE 	 	 		2 	 	 	ROBERTO 	 	5 
+FE 	 	 		1 	 	 	TITO 	 	 	5 
+FE 	 	 		1 	 	 	LEANDRO 	 	7 
+PI 	 	 		1 	 	 	FERNANDO 	 	6 
+PI 	 	 		1 	 	 	LUCIANO 	 	6 
+PI 	 	 		1 	 	 	JACINTA 	 	5 
+LIBRES 	 	 		2 	 	 	MARIA 	 	 	1 
+LIBRES 	 	 		1 	 	 	JUANCITO 	 	6 
+LIBRES 	 	 		1 	 	 	CHICHO 	 	 	6 
+RIVERPLATE 	 	 	1 	 	 	ENZO 	 	 	10 
+RIVERPLATE 	 	 	1 	 	 	LUCAS 	 	 	5 
+RIVERPLATE 	 	 	1 	 	 	MARCELO 	 	6 
+BOCA 	 	 		1 	 	 	DANIEL 	 	 	1 
+BOCA 	 	 		1 	 	 	GUILLERMO 	 	1 
+BOCA 	 	 		1 	 	 	GUSTAVO 	 	3 
+MST 	 	 		1 	 	 	GABY 	 	 	4 
+MST 	 	 		1 	 	 	JUAN 	 	 	5 
+MST 	 	 		1 	 	 	TITO 	 	 	3 
+
+ Votos en Blanco: 1
+Votos en impugnados: 1
